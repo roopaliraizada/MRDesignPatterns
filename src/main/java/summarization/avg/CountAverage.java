@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.Map;
 
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
@@ -86,9 +87,11 @@ public class CountAverage {
 	public static void main(String[] args){
 		Configuration conf = new Configuration();
 		String[] otherArgs;
-		try {
-			otherArgs = new GenericOptionsParser(conf, args)
-					.getRemainingArgs();
+
+			try {
+				otherArgs = new GenericOptionsParser(conf, args)
+						.getRemainingArgs();
+			
 			
 			if (otherArgs.length < 2) {
 				System.err.println("Usage CountAverage input output");
@@ -103,19 +106,28 @@ public class CountAverage {
 			job.setOutputKeyClass(IntWritable.class);
 			job.setOutputValueClass(CountAverageTuple.class);
 			
+			// Clean up output directory if already exists
+			FileSystem.get(conf).delete(new Path(otherArgs[1]), true);
+			
 			FileInputFormat.setInputPaths(job, new Path(otherArgs[0]));
 			FileOutputFormat.setOutputPath(job, new Path(otherArgs[1]));
-			
+						
 			boolean result = job.waitForCompletion(true);
 			if (result) {
 				System.exit(0);
 			} else {
 				System.exit(1);
 			}
-		} catch (IOException | ClassNotFoundException | InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	}
 }

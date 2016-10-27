@@ -33,7 +33,8 @@ public class SimpleWordCount {
 
 	}
 
-	public static class WordCountReducer extends Reducer<Text, IntWritable, Text, IntWritable>{
+	public static class WordCountReducer extends
+			Reducer<Text, IntWritable, Text, IntWritable> {
 
 		IntWritable result = new IntWritable();
 
@@ -51,18 +52,27 @@ public class SimpleWordCount {
 	public static void main(String args[]) {
 		Configuration conf = new Configuration();
 		Job job;
+
 		try {
 			job = Job.getInstance(conf, "simple word count");
+
 			job.setJarByClass(SimpleWordCount.class);
 			job.setMapperClass(WordCountMapper.class);
-			//job.setCombinerClass(WordCountReducer.class);
+			// job.setCombinerClass(WordCountReducer.class);
 			job.setReducerClass(WordCountReducer.class);
 			job.setOutputKeyClass(Text.class);
 			job.setOutputValueClass(IntWritable.class);
 			FileInputFormat.addInputPath(job, new Path(args[0]));
 			FileOutputFormat.setOutputPath(job, new Path(args[1]));
 			System.exit(job.waitForCompletion(true) ? 0 : 1);
-		} catch (IOException | ClassNotFoundException | InterruptedException e) {
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

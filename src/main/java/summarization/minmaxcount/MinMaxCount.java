@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Map;
 
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
@@ -16,6 +17,7 @@ import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
 
 import summarization.util.MRDPUtils;
+import summarization.minmaxcount.MinMaxCountTuple;
 
 /**
  * Given a list of user comments, determine the first and last time the user
@@ -112,6 +114,7 @@ public class MinMaxCount {
 	}
 
 	/**
+	 * Usage: bin/hadoop jar /Users/rraizada/Documents/eclipse_workspaces/MRP/MRDesignPatterns/target/MRDesignPatterns-0.0.1-SNAPSHOT.jar summarization.minmaxcount.MinMaxCount /user/rraizada/data/input/sample.xml /user/rraizada/data/output
 	 * @param args
 	 */
 	public static void main(String[] args) throws Exception {
@@ -132,6 +135,9 @@ public class MinMaxCount {
 		job.setOutputKeyClass(Text.class);
 		job.setOutputValueClass(MinMaxCountTuple.class);
 
+		// Clean up output directory if already exists
+		FileSystem.get(conf).delete(new Path(otherArgs[1]), true);
+		
 		FileInputFormat.setInputPaths(job, new Path(otherArgs[0]));
 		FileOutputFormat.setOutputPath(job, new Path(otherArgs[1]));
 

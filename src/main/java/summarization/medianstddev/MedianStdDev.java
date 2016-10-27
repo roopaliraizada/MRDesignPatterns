@@ -1,5 +1,6 @@
 package summarization.medianstddev;
 
+
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,6 +10,7 @@ import java.util.Map.Entry;
 import java.util.TreeMap;
 
 import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.LongWritable;
@@ -23,6 +25,7 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
 
+import summarization.medianstddev.MedianStdDevTuple;
 import summarization.util.MRDPUtils;
 
 public class MedianStdDev {
@@ -201,6 +204,9 @@ public class MedianStdDev {
 		job.setReducerClass(MedianStdDevReducer.class);
 		job.setOutputKeyClass(IntWritable.class);
 		job.setOutputValueClass(MedianStdDevTuple.class);
+		
+		// Clean up output directory if already exists
+		FileSystem.get(conf).delete(new Path(otherArgs[1]), true);
 
 		FileInputFormat.setInputPaths(job, new Path(otherArgs[0]));
 		FileOutputFormat.setOutputPath(job, new Path(otherArgs[1]));

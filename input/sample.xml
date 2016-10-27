@@ -1,6 +1,6 @@
-<row Id="8189677" PostId="6881722" Text="Have you looked at Hadoop?" CreationDate="2011-07-30T07:29:33.343" UserId="831878" />
-<row Id="8189677" PostId="6881722" Text="Have you looked at Hadoop?" CreationDate="2011-08-01T07:29:33.343" UserId="831878" />
-<row Id="8189677" PostId="6881722" Text="Have you looked at Hadoop?" CreationDate="2011-08-02T07:29:33.343" UserId="831878" />
-<row Id="8189678" PostId="6881722" Text="Have you looked at Hadoop?" CreationDate="2011-06-30T07:29:33.343" UserId="931878" />
-<row Id="8189678" PostId="6881722" Text="Have you looked at Hadoop?" CreationDate="2011-07-01T07:29:33.343" UserId="931878" />
-<row Id="8189678" PostId="6881722" Text="Have you looked at Hadoop?" CreationDate="2011-08-02T07:29:33.343" UserId="931878" />
+<row Id="8189677" PostId="6881722" Text="Have you looked at Hadoop?" CreationDate="2011-07-30T07:29:33.343" UserId="831878" Location="CA" />
+<row Id="8189677" PostId="6881722" Text="Have you looked at Hadoop?" CreationDate="2011-08-01T07:29:33.343" UserId="831878" Location="CA" />
+<row Id="8189677" PostId="6881722" Text="Have you looked at Hadoop?" CreationDate="2011-08-02T07:29:33.343" UserId="831878" Location="NJ" />
+<row Id="8189678" PostId="6881722" Text="Have you looked at Hadoop?" CreationDate="2011-06-30T07:29:33.343" UserId="931878" Location="GA" />
+<row Id="8189678" PostId="6881722" Text="Have you looked at Hadoop?" CreationDate="2011-07-01T07:29:33.343" UserId="931878" Location="GA" />
+<row Id="8189678" PostId="6881722" Text="Have you looked at Hadoop?" CreationDate="2011-08-02T07:29:33.343" UserId="931878" Location="XX" />
